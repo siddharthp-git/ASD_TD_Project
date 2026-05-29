@@ -1,6 +1,6 @@
-# Dual-View Spatio-Temporal Graph Attention Transformer (DV-STTGAT) — NYU-Only, CC400 Atlas
+# Dual-View Spatio-Temporal Graph Attention Transformer (DV-STTGAT) — usm-Only, CC400 Atlas
 
-This directory contains the implementation of the **Dual-View Spatio-Temporal Graph Attention Transformer (DV-STTGAT)** model tailored for **ASD** (Autism Spectrum Disorder) vs. **TD** (Typical Development) classification using resting-state fMRI (rs-fMRI) data, specifically restricted to the NYU site of the ABIDE dataset. 
+This directory contains the implementation of the **Dual-View Spatio-Temporal Graph Attention Transformer (DV-STTGAT)** model tailored for **ASD** (Autism Spectrum Disorder) vs. **TD** (Typical Development) classification using resting-state fMRI (rs-fMRI) data, specifically restricted to the usm site of the ABIDE dataset. 
 
 This model extracts temporal characteristics from blood-oxygen-level-dependent (BOLD) signals using a multi-scale temporal CNN, constructs three distinct spatial graphs (static Pearson correlation, sparse partial correlation, and an end-to-end learnable cosine-similarity graph), and fuses them using a learnable softmax gating mechanism.
 
@@ -35,7 +35,7 @@ Follow these commands line-by-line.
 ### Step 2.1: Open Terminal & Clone/Navigate to Directory
 Open PowerShell (on Windows) or Terminal, and navigate to the project directory:
 ```powershell
-cd "e:\ASD_TD_Project\dv-sttgat-nyu-cc400"
+cd "e:\ASD_TD_Project\dv-sttgat-usm-cc400"
 ```
 
 ### Step 2.2: Create and Activate a Virtual Environment
@@ -70,7 +70,7 @@ Once activated, your command prompt should show `(venv)` at the beginning.
 You can choose either of the following two methods to install the required libraries:
 
 #### Option A: Quick Installation via `requirements.txt` (Recommended for CPU or Default Setup)
-We have provided a [requirements.txt](file:///e:/ASD_TD_Project/dv-sttgat-nyu-cc400/requirements.txt) file that lists all dependencies (including PyTorch and PyTorch Geometric). To install everything with a single command, run:
+We have provided a [requirements.txt](file:///e:/ASD_TD_Project/dv-sttgat-usm-cc400/requirements.txt) file that lists all dependencies (including PyTorch and PyTorch Geometric). To install everything with a single command, run:
 ```bash
 pip install -r requirements.txt
 ```
@@ -130,7 +130,7 @@ D:/ABIDE/
 The phenotype metadata file (e.g., `asd_717participants.csv`) must contain at least the following column headers:
 * `SUB_ID`: Subject ID matching the directory folder names (either as integers or strings).
 * `DX_GROUP`: Diagnosis group where `1` = ASD (Autism Spectrum Disorder) and `2` = TD (Typical Development).
-* `SITE_ID`: Site label. The NYU loader looks specifically for `"NYU"` or `"ABIDEII-NYU_1"`.
+* `SITE_ID`: Site label. The usm loader looks specifically for `"usm"` or `"ABIDEII-usm_1"`.
 
 ### 2. fMRI File Naming Convention
 The raw fMRI image must be in NIfTI format (either `.nii` or `.nii.gz`) and be named:
@@ -162,26 +162,35 @@ You do not need to modify any source code. Simply pass your paths as arguments w
 #### Option B: Modify the Defaults in the Code
 If you want to run the scripts without typing the paths every time, open the following files and edit the default path variables located near the top of the files:
 
-1. **[build_cc400_cache.py](file:///e:/ASD_TD_Project/dv-sttgat-nyu-cc400/build_cc400_cache.py)**
+1. **[build_cc400_cache.py](file:///e:/ASD_TD_Project/dv-sttgat-usm-cc400/build_cc400_cache.py)**
    * Locate **Line 67**:
      ```python
      DEFAULT_DATA_DIR  = r"D:\ABIDE"  # <-- Change this to your raw fMRI data directory
      ```
-2. **[train.py](file:///e:/ASD_TD_Project/dv-sttgat-nyu-cc400/train.py)**
+2. **[train.py](file:///e:/ASD_TD_Project/dv-sttgat-usm-cc400/train.py)**
    * Locate **Line 61**:
      ```python
      DEFAULT_PHENOTYPE = r"D:\ABIDE\asd_717participants.csv"  # <-- Change to your phenotype CSV file path
      ```
-3. **[ensemble_eval.py](file:///e:/ASD_TD_Project/dv-sttgat-nyu-cc400/ensemble_eval.py)**
+3. **[ensemble_eval.py](file:///e:/ASD_TD_Project/dv-sttgat-usm-cc400/ensemble_eval.py)**
    * Locate **Line 36**:
      ```python
      DEFAULT_PHENOTYPE = r"D:\ABIDE\asd_717participants.csv"  # <-- Change to your phenotype CSV file path
      ```
-4. **[tune.py](file:///e:/ASD_TD_Project/dv-sttgat-nyu-cc400/tune.py)**
+4. **[tune.py](file:///e:/ASD_TD_Project/dv-sttgat-usm-cc400/tune.py)**
    * Locate **Line 86**:
      ```python
      DEFAULT_PHENOTYPE = r"D:\ABIDE\asd_717participants.csv"  # <-- Change to your phenotype CSV file path
      ```
+
+### 4. Changing the Site ID Filter
+
+By default, the data loader filters specifically for the usm site. If you wish to filter for a different site, open **[data_loader.py](file:///e:/ASD_TD_Project/dv-sttgat-usm-cc400/data_loader.py)**:
+* Locate **Line 114**:
+  ```python
+  usm_pheno = pheno[(pheno["SITE_ID"] == "usm") | (pheno["SITE_ID"] == "ABIDEII-usm_1")]
+  ```
+  Change `"usm"` and `"ABIDEII-usm_1"` to your target site ID(s) from your phenotype file.
 
 ---
 
@@ -211,7 +220,7 @@ python build_cc400_cache.py --data_dir D:/ABIDE --cache_dir ./cc400_bold_cache -
 ### Command Options:
 * `--data_dir`: Path to the raw ABIDE dataset directory (default: `D:/ABIDE`).
 * `--cache_dir`: Destination directory to output the cached matrices (default: `./cc400_bold_cache`).
-* `--site`: (Optional) Comma-separated sites to limit caching to (e.g., `NYU`).
+* `--site`: (Optional) Comma-separated sites to limit caching to (e.g., `usm`).
 * `--n_jobs`: Number of parallel CPU workers to use. Omitting this uses all available cores.
 * `--limit`: Stop after processing N subjects (useful for debugging).
 
@@ -220,7 +229,7 @@ python build_cc400_cache.py --data_dir D:/ABIDE --cache_dir ./cc400_bold_cache -
 ## 5. Pipeline Step 2: Model Training & 5-Fold Cross-Validation
 
 Once you have built your cache, you can train the model. The training script (`train.py`):
-1. Loads cached BOLD signals for NYU-site subjects only.
+1. Loads cached BOLD signals for usm-site subjects only.
 2. Lazily computes a Pearson correlation matrix and a sparse partial covariance (Precision matrix via `GraphicalLassoCV` with Ledoit-Wolf fallback) for every subject.
 3. Executes a **Stratified 5-Fold Cross-Validation**.
 4. Inside each fold, it Z-scores BOLD signals *subject-wise* to prevent data leakage from validation/testing subjects.
@@ -257,7 +266,7 @@ python train.py --epochs 300 --lr 5e-5 --batch_size 16 --focal_gamma 2.5 --mixup
 
 Once training finishes, you will have 5 trained checkpoints: `dv_sttgat_fold1.pt` to `dv_sttgat_fold5.pt`. The `ensemble_eval.py` script aggregates their predictions to provide a more robust SOTA score:
 1. Loads all 5 fold weights.
-2. Performs soft voting (averages predicted probabilities across all 5 models) on each NYU subject.
+2. Performs soft voting (averages predicted probabilities across all 5 models) on each usm subject.
 3. Dynamically calculates Youden's J optimal threshold to classify the soft predictions.
 4. Outputs the final ensembled **ROC-AUC**, **Accuracy**, **Sensitivity** (true positive rate), and **Specificity** (true negative rate) for the entire dataset.
 
@@ -295,12 +304,12 @@ Once hyperparameter tuning is running or finished, you can view the results on a
 
 ## 8. Codebase Architecture & File Roles
 
-Below is an overview of what each script does in the `dv-sttgat-nyu-cc400/` directory:
+Below is an overview of what each script does in the `dv-sttgat-usm-cc400/` directory:
 
 ```
-dv-sttgat-nyu-cc400/
+dv-sttgat-usm-cc400/
 ├── build_cc400_cache.py   # Extracts BOLD signals from raw fMRI using CC400 atlas.
-├── data_loader.py         # Loads BOLD matrices, filters for NYU, aligns with labels.
+├── data_loader.py         # Loads BOLD matrices, filters for usm, aligns with labels.
 ├── graph_construction.py  # Builds Pearson and Precision graphs for each subject.
 ├── cnn.py                 # Multi-scale 1D Inception CNN for BOLD temporal modeling.
 ├── dataset.py             # Formulates PyG graph Data items + sliding window aug.

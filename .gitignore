@@ -2,7 +2,7 @@
 /*
 
 # Allow tracking of the subdirectories
-!/dv-sttgat-nyu-cc400/
+!/dv-sttgat-usm-cc400/
 !/dv-sttgat-11-18-cc400-hyper/
 !/dv-sttgat-ADOS-0-10-cc400-hyper/
 
@@ -10,13 +10,13 @@
 !.gitignore
 
 # Inside the target subdirectories, ignore environment, caches, and large binary artifacts
-dv-sttgat-nyu-cc400/venv/
-dv-sttgat-nyu-cc400/__pycache__/
-dv-sttgat-nyu-cc400/cc400_bold_cache/
-dv-sttgat-nyu-cc400/nilearn_cache/
-dv-sttgat-nyu-cc400/tmp/
-dv-sttgat-nyu-cc400/*.pt
-dv-sttgat-nyu-cc400/*.db
+dv-sttgat-usm-cc400/venv/
+dv-sttgat-usm-cc400/__pycache__/
+dv-sttgat-usm-cc400/cc400_bold_cache/
+dv-sttgat-usm-cc400/nilearn_cache/
+dv-sttgat-usm-cc400/tmp/
+dv-sttgat-usm-cc400/*.pt
+dv-sttgat-usm-cc400/*.db
 
 dv-sttgat-11-18-cc400-hyper/venv/
 dv-sttgat-11-18-cc400-hyper/__pycache__/
