@@ -1,13 +1,14 @@
 # Ignore everything at the workspace root by default
 /*
 
-# Allow tracking of the dv-sttgat-nyu-cc400 subdirectory
+# Allow tracking of the subdirectories
 !/dv-sttgat-nyu-cc400/
+!/dv-sttgat-11-18-cc400-hyper/
 
 # Allow the root .gitignore itself
 !.gitignore
 
-# Inside the target subdirectory, ignore environment, caches, and large binary artifacts
+# Inside the target subdirectories, ignore environment, caches, and large binary artifacts
 dv-sttgat-nyu-cc400/venv/
 dv-sttgat-nyu-cc400/__pycache__/
 dv-sttgat-nyu-cc400/cc400_bold_cache/
@@ -15,3 +16,11 @@ dv-sttgat-nyu-cc400/nilearn_cache/
 dv-sttgat-nyu-cc400/tmp/
 dv-sttgat-nyu-cc400/*.pt
 dv-sttgat-nyu-cc400/*.db
+
+dv-sttgat-11-18-cc400-hyper/venv/
+dv-sttgat-11-18-cc400-hyper/__pycache__/
+dv-sttgat-11-18-cc400-hyper/cc400_bold_cache/
+dv-sttgat-11-18-cc400-hyper/nilearn_cache/
+dv-sttgat-11-18-cc400-hyper/tmp/
+dv-sttgat-11-18-cc400-hyper/*.pt
+dv-sttgat-11-18-cc400-hyper/*.db

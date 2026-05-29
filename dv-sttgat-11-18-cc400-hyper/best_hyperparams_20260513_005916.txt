@@ -1,0 +1,40 @@
+======================================================================
+  DV-STTGAT — Optuna Hyperparameter Tuning Results
+  Timestamp     : 20260513_005916
+  Best mean Acc : 0.742857   (Trial #73)
+  Trials run    : 200
+======================================================================
+
+  Tuning Configuration
+  n_trials            : 100
+  tune_epochs         : 300
+  n_folds             : 5
+  ES patience         : 100 epochs / 100 trials
+
+----------------------------------------------------------------------
+  Best Hyperparameters
+----------------------------------------------------------------------
+    lr                   : 0.0022562
+    weight_decay         : 0.000157923
+    focal_gamma          : 2.52229
+    focal_alpha          : 0.468115
+    mixup_alpha          : 0.515236
+    mixup_prob           : 0.448321
+    cosine_t0            : 12
+    batch_size           : 32
+
+----------------------------------------------------------------------
+  Suggested train.py command (copy-paste ready)
+----------------------------------------------------------------------
+    python train.py \
+        --lr           2.26e-03          \
+        --focal_gamma  2.5223 \
+        --focal_alpha  0.4681 \
+        --cosine_t0    12       \
+        --mixup_alpha  0.5152 \
+        --mixup_prob   0.4483  \
+        --batch_size   32
+
+  NOTE: weight_decay must be set manually (not exposed in train.py CLI).
+        Set WEIGHT_DECAY = 0.000157923 in train.py config block.
+======================================================================
