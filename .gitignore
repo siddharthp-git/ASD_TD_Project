@@ -4,6 +4,7 @@
 # Allow tracking of the subdirectories
 !/dv-sttgat-nyu-cc400/
 !/dv-sttgat-11-18-cc400-hyper/
+!/dv-sttgat-ADOS-0-10-cc400-hyper/
 
 # Allow the root .gitignore itself
 !.gitignore
@@ -24,3 +25,11 @@ dv-sttgat-11-18-cc400-hyper/nilearn_cache/
 dv-sttgat-11-18-cc400-hyper/tmp/
 dv-sttgat-11-18-cc400-hyper/*.pt
 dv-sttgat-11-18-cc400-hyper/*.db
+
+dv-sttgat-ADOS-0-10-cc400-hyper/venv/
+dv-sttgat-ADOS-0-10-cc400-hyper/__pycache__/
+dv-sttgat-ADOS-0-10-cc400-hyper/cc400_bold_cache/
+dv-sttgat-ADOS-0-10-cc400-hyper/nilearn_cache/
+dv-sttgat-ADOS-0-10-cc400-hyper/tmp/
+dv-sttgat-ADOS-0-10-cc400-hyper/*.pt
+dv-sttgat-ADOS-0-10-cc400-hyper/*.db
