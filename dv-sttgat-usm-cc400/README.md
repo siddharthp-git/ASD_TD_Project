@@ -140,7 +140,7 @@ The raw fMRI image must be in NIfTI format (either `.nii` or `.nii.gz`) and be n
 
 By default, the scripts point to local development directories (e.g., `D:\ABIDE\`). Since you are setting this up on your own machine, you will need to specify where your data is located. You can do this in **two ways**:
 
-#### Option A: Use Command Line Arguments (Recommended)
+#### Option A: Use Command Line Arguments
 You do not need to modify any source code. Simply pass your paths as arguments when running the scripts:
 * **For caching BOLD signals:**
   ```bash
@@ -159,7 +159,7 @@ You do not need to modify any source code. Simply pass your paths as arguments w
   python tune.py --phenotype "/path/to/your/asd_717participants.csv" --cache_dir "./cc400_bold_cache"
   ```
 
-#### Option B: Modify the Defaults in the Code
+#### Option B: Modify the Defaults in the Code (Recommended)
 If you want to run the scripts without typing the paths every time, open the following files and edit the default path variables located near the top of the files:
 
 1. **[build_cc400_cache.py](file:///e:/ASD_TD_Project/dv-sttgat-usm-cc400/build_cc400_cache.py)**
