@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+cc400_bold_cache/
+nilearn_cache/
+tmp/
+
+# Virtual Environment
+venv/
+.env
+
+# Large model checkpoints and databases (subject to open questions)
+*.pt
+*.db
+
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
